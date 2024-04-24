@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/42a182743f.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>BLOG APP</title>
+  </head>
+  <body>
+    <!-- nav -->
+    <nav>
+      <div>
+        <img src="./images/logo.png" alt="logo" />
+      </div>
+
+      <ul>
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="api/v1/posts/post">Posts</a>
+        </li>
+        <li>
+          <a href="api/v1/users/login">Login</a>
+        </li>
+        <li>
+          <a href="api/v1/users/register">Register</a>
+        </li>
+        <li>
+          <a href="api/v1/posts/get-post-form" class="create-post-btn">New Post</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- header -->
+    <header>
+      <div class="header-content">
+        <h1>You write, We read</h1>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores
+          reiciendis
+        </p>
+        <a href="api/v1/posts/get-post-form">
+          <span>Create New Post</span>
+        </a>
+      </div>
+    </header>
+    <!-- Latest post title -->
+
+    <div class="latest-post-title">
+      <!-- Icon -->
+      <div class="icon">
+        <i class="fas fa-book-open"></i>
+      </div>
+      <h1>Latest Posts (20)</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+        voluptates.
+      </p>
+    </div>
+
+    <!-- content -->
+    <section class="container-flex">
+        <article class="post-content">
+          
+          <img src="./images/post3.jpg" alt="" class="post-image" />
+          <p class="post-info">
+            <span class="post-author">
+              <i class="fas fa-user"></i>
+              <a href="#">Anjali Gupta</a>
+            </span>
+            <span class="post-date">
+              <i class="far fa-calendar-alt"></i>
+              <time datetime="2020-01-01">January 1, 2020</time>
+            </span>
+          </p><h1 class="post-title">Become a Web Developer</h1>
+          <p class="post-body">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia
+            itaque inventore culpa placeat! Cum nam optio, labore, voluptas sunt
+            quam rem cupiditate laboriosam amet reiciendis velit doloribus eum!
+            Repudiandae, odio?
+          </p>
+          <!-- category -->
+          <div class="post-category">
+            <span>Category:</span>
+          </div>
+          <a href="/" class="post-read-more">Continue Reading...</a>
+        </article>
+
+        <article class="post-content">
+          
+          <img src="./images/post7.jpg" alt="" class="post-image" />
+          <p class="post-info">
+            <span class="post-author">
+              <i class="fas fa-user"></i>
+              <a href="#">Anjali Gupta</a>
+            </span>
+            <span class="post-date">
+              <i class="far fa-calendar-alt"></i>
+              <time datetime="2020-01-01">January 1, 2020</time>
+            </span>
+          </p><h1 class="post-title">How to Take care of Cat</h1>
+          <p class="post-body">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia
+            itaque inventore culpa placeat! Cum nam optio, labore, voluptas sunt
+            quam rem cupiditate laboriosam amet reiciendis velit doloribus eum!
+            Repudiandae, odio?
+          </p>
+          <!-- category -->
+          <div class="post-category">
+            <span>Category:</span>
+          </div>
+          <a href="/" class="post-read-more">Continue Reading...</a>
+        </article>
+
+        <article class="post-content">
+          
+          <img src="./images/post7.jpg" alt="" class="post-image" />
+          <p class="post-info">
+            <span class="post-author">
+              <i class="fas fa-user"></i>
+              <a href="#">Anjali Gupta</a>
+            </span>
+            <span class="post-date">
+              <i class="far fa-calendar-alt"></i>
+              <time datetime="2020-01-01">January 1, 2020</time>
+            </span>
+          </p>
+          <h1 class="post-title">How to Take care of Cat</h1>
+          <p class="post-body">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia
+            itaque inventore culpa placeat! Cum nam optio, labore, voluptas sunt
+            quam rem cupiditate laboriosam amet reiciendis velit doloribus eum!
+            Repudiandae, odio?
+          </p>
+          <!-- category -->
+          <div class="post-category">
+            <span>Category:</span>
+            
+          </div>
+          <a href="/" class="post-read-more">Continue Reading...</a>
+        </article>
+
+        
+    
+      
+    </section>
+    <!-- footer -->
+    <footer>
+      <div class="about">
+        <h1><span class="logo-text">ANJALI</span> <span>Blog</span></h1>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti a
+          recusandae, molestiae incidunt
+        </p>
+        <!-- Contacts -->
+        <div class="contact">
+          <span>
+            <i class="fas fa-phone"></i>
+            +91 9555437581
+          </span>
+          <span>
+            <i class="fas fa-envelope"></i>
+            
+            <a href="mailto:guptaanjali90757@gmail.com">
+              support@anjali.com
+            </a>
+          </span>
+
+        </div>
+        <!-- socials -->
+        <div class="socials">
+          <a href="https://www.youtube.com/c/inovotek-academy">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://www.youtube.com/c/inovotek-academy">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.youtube.com/c/inovotek-academy">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.youtube.com/c/inovotek-academy">
+            <i class="fab fa-facebook"></i>
+          </a>
+         
+    </footer>
+  </body>
+</html>
