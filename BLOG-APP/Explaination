@@ -1,0 +1,159 @@
+                   API BLOG APPLICATION
+INTRODUCTION:
+The Blogging Application's REST API is a web-based platform that empowers bloggers and users to share their ideas and perspectives in an interactive way. The API allows users to publish blogs on their personal profiles, complete with image support, which enhances the user experience. The API also enables users to view and search for blogs and blog categories that align with their personal interests, fostering a community-driven platform. Users can also leave comments on published posts, encouraging engagement.
+The API uses standard HTTP methods to retrieve, create, update, and delete data, providing a secure and robust way for the Blogging Application to interact with the data, making it easy and safe for users to share their thoughts and ideas. This REST API is an ideal solution for anyone who wants to connect with others and share their ideas through blogging.
+FEATURES:
+·	Posts CRUD
+·	Users CRUD
+·	Category CRUD
+·	Comments on posts CRUD
+·	Post limiting for pagination
+·	Post sorting
+·	Role based authentication
+·	Custom Exception handling
+·	JWT authentication
+·	DTO pattern
+·	Image upload
+·	Post searching by keyword
+·	Role specific API access
+·	Data Validation using Hibernate validator
+·	Documentation using Swagger
+I’ll walk you through the process of using Express, MongoDB, and other required dependencies to build up your Node.js project for a RESTful API in this part. This comprehensive guide will assist you in initiating your project.
+
+Step 1: Establish a new project directory.Make a new directory for your project first. To create your project, open your terminal and go to the folder where it is located. You can make a new directory by using the mkdir command.
+mkdir restful-api-project
+Open the newly created project directory:
+cd restful-api-project
+
+Step 2: Establish a Node.js project in step two.You must initialize a Node.js project in order to handle the dependencies and configuration for your project. In the directory of your project, execute the following command:
+npm init
+Now, you will be prompted with this command to enter information about your project, including its name, version, description, entry point (which is usually index.js), and more. You can enter your own settings or accept the defaults by pressing Enter.
+A package.json file will be created in your project directory once this step is finished. Details regarding your project and its dependencies are included in this file.
+
+Step 3: Install Dependencies
+Several dependencies are needed to develop a RESTful API with Node.js. The following command can be used to install them:
+npm install express mongoose nodemon dotenv
+Express: The middleware and REST API endpoints will be configured using the Express.js framework.Mongoose: It is a library for MongoDB Object Data Modelling (ODM). It facilitates communication with MongoDB databases.Nodemon: It is a development tool that, upon detecting changes, instantly restarts your Node.js application. It’s quite helpful when developing.dotenv: You can manage environment variables in a.env file by using the dotenv library. This file can be used to hold private data, such as database connection strings.
+
+Step 4: Create an Entry Point
+Now, we will create the Node.js application’s entry point. This file is usually called index.js. This file can be created in the project directory using any code editor.
+// index.js
+const express = require('express');const mongoose = require('mongoose');const app = express();app.get('/', (req, res) => {res.send('Hello,I am Tanvi!');});const PORT = process.env.PORT || 3000;app.listen(PORT, () => {console.log(`Server is running on port ${PORT}`);});
+Here, we’ve set up a simple Express server that responds to requests for the root route by sending a “Hello, I am Tanvi!” message and listening on a given port (or by default, 3000).
+
+Step 5:Configuring MongoDB for Your Node.js RESTful API
+Here, we will be setting up MongoDB for the Node.js RESTful API. The NoSQL database MongoDB will be used to hold the data for our API. This is how you configure it.
+5.1 Create a MongoDB Account
+Launch your browser and navigate to the official MongoDB website.Log in if you already have a MongoDB account. If not, you will have to register for a new account.
+
+Login in MongoDB
+Select M0—FREE and click on Create.
+
+Selecting Type to deploy database
+Now, in services, select username and password. Please provide the password and username.
+
+Selecting Data Service
+Click on Create User, and a user will be added.
+
+User added
+Then add your IP address and click on Add my current IP address.
+
+Now click on Connect to connect with the environment.
+
+Connecting to the database environment
+Select Compass to connect with MongoDB’s GUI.
+
+Connecting to Cluster
+Here, select the option that is suitable. We will select the first option and copy the connection string to paste it into Compass.
+
+Complete the process. Change the URL with your actual password, then paste it into your .env file. (Refer step 6)
+mongodb+srv://tanvitrivedi555:<password>@cluster0.brymtey.mongodb.net/
+
+Step 6: Make a file called .env.In the directory of the project, create a .env file. MongoDB connection string and other private information will be kept in this file. We can define variables like these in .env file:
+DATABASE_URL=mongodb://your-mongodb-connection-string
+Replace the above URL with the actual one.
+Now in MongoDB Compass, add this string as well.
+If you are using a local environment, then paste the above into Local MongoDB Compass as well.
+
+Step 7: Set Up the Connection to MongoDB
+// index.js
+// … (previous code)const mongoose = require('mongoose');const dotenv = require('dotenv');dotenv.config();const DATABASE_URL = process.env.DATABASE_URL;mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true }) .then(() => { console.log('Connected to MongoDB'); }) .catch((error) => { console.error('Error connecting to MongoDB:', error); });
+The dotenv library is imported in this code in order to read environment variables from the .env file. Next, we use Mongoose to connect to the MongoDB database after retrieving the MongoDB connection URL from the environment variables.
+
+Step 8: Launch the Development ServerWe will use Nodemon to launch the development server. In package.json file, update the “scripts” section as below:
+“scripts”: {“start”: “nodemon index.js”}
+With this setup, we can use the following command to launch the server:
+npm start
+Here, the MongoDB database will be connected to the Express server, which will be operational.
+Good news! You’ve successfully established the fundamental framework for your Node.js application, utilizing Express, MongoDB, and other necessary components to create a RESTful API. To create a RESTful API, you can now start specifying your models, routes, and other elements.
+
+Step 9: Defining the Data Models
+We will define the data models for our application in this step. Three models are going to be created: User, BlogPost, and Comment. The MongoDB database’s data structure will be determined by these models.
+User Model (User.js)
+const mongoose = require('mongoose');const userSchema = new mongoose.Schema({ username: String, email: String, password: String, registrationDate: { type: Date, default: Date.now },});module.exports = mongoose.model('User', userSchema);
+Blog Post Model (BlogPost.js)
+const mongoose = require('mongoose');const blogPostSchema = new mongoose.Schema({ title: String, content: String, tags: [String], author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, creationDate: { type: Date, default: Date.now },});module.exports = mongoose.model('BlogPost', blogPostSchema);
+Comment Model (Comment.js)
+const mongoose = require('mongoose');const commentSchema = new mongoose.Schema({ commenter: String, text: String, blogPost: { type: mongoose.Schema.Types.ObjectId, ref: 'BlogPost' }, creationDate: { type: Date, default: Date.now },});module.exports = mongoose.model('Comment', commentSchema);
+
+Step 10: Creating the Server (index.js)
+Let’s now construct your server file into index.js, which contains your Node.js application. The CRUD functions for blog posts and comments, as well as user registration and authentication, will be managed by this server.
+const express = require('express');const mongoose = require('mongoose');const bcrypt = require('bcryptjs');const jwt = require('jsonwebtoken');const bodyParser = require('body-parser');const app = express();const PORT = process.env.PORT || 3000;// Connect to MongoDBmongoose .connect('mongodb://localhost/blog-api', { useNewUrlParser: true, useUnifiedTopology: true }) .then(() => console.log('MongoDB Connected')) .catch(err => console.log(err));app.use(bodyParser.json());const User = require('./models/user.js');const BlogPost = require('./models/blogpost.js');const Comment = require('./models/comment.js');const secretKey = 'your-secret-key';// User registration and authentication// (Routes for user registration and login go here)// Middleware to authenticate user// (Authentication middleware goes here)// BlogPost schema and CRUD operations// (Routes for managing blog posts go here)// Comment schema and CRUD operations// (Routes for managing comments go here)app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+Step 11: Implementing User Authentication and Registration
+The routes for user authentication and registration should be created in this phase.
+// User registration and authentication
+app.post('/api/users/register', async (req, res) => {const { username, email, password } = req.body;const salt = await bcrypt.genSalt(10);const hashedPassword = await bcrypt.hash(password, salt);const user = new User({username,email,password: hashedPassword,});user.save().then(user => {const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });res.json({ token, user });}).catch(err => res.status(400).json(err));});app.post('/api/users/login', async (req, res) => {const { email, password } = req.body;const user = await User.findOne({ email });if (!user) {return res.status(400).json({ message: 'User not found' });}const validPassword = await bcrypt.compare(password, user.password);if (!validPassword) {return res.status(400).json({ message: 'Invalid password' });}const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });res.json({ token, user });});
+→ We have use the bcrypt library to safely hash the password for user registration before putting it in the database. To manage user authentication, establish a JSON Web Token (JWT) upon successful registration.
+
+Step 12: Creating Authentication Middleware
+To authenticate users for routes that need authorization, develop a middleware function. The purpose of this middleware function is to validate the user’s identity with JWT verification. It can be included in this manner:
+// Middleware to authenticate user
+function authenticateUser(req, res, next) {let token = req.header("Authorization");if (!token) {return res.status(401).json({ message: "Unauthorized. Token is missing." });}token = token.split(" ")[1];try {const verified = jwt.verify(token, secretKey);req.user = verified;next();} catch (err) { res.status(400).json({ message: 'Invalid token' });}}
+
+Step 13: Implementing BlogPost CRUD Operations
+It’s time to add blog post-handling routes now. The processes for adding, editing, removing, and reading blog entries can be implemented here.
+// BlogPost schema and CRUD operations
+app.post('/api/blogposts', authenticateUser, (req, res) => {const { title, content, tags } = req.body;const blogPost = new BlogPost({ title, content, tags, author: req.user.userId }); //passing author idblogPost.save().then(blogPost => res.json(blogPost)).catch(err => res.status(400).json(err));});app.get('/api/blogposts', (req, res) => {const query = req.query; //filter blogpostsBlogPost.find(query).populate("author") //populate author data.then(posts => res.json(posts)).catch(err => res.status(400).json(err));});app.get('/api/blogposts/:id', (req, res) => {BlogPost.findById(req.params.id).populate("author") //populate user data.then(post => res.json(post)).catch(err => res.status(400).json(err));});app.patch('/api/blogposts/:id', authenticateUser, (req, res) => {BlogPost.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(post => res.json(post)).catch(err => res.status(400).json(err));});app.delete('/api/blogposts/:id', authenticateUser, (req, res) => {BlogPost.findByIdAndRemove(req.params.id).then(() => res.json({ message: 'Post deleted' })).catch(err => res.status(400).json(err));});
+
+Step 14: Applying Comment CRUD Operations
+Provide comment-handling routes in a manner similar to blog postings. On blog entries, you can add, read, edit, and remove comments.
+// Comment schema and CRUD operations
+app.post('/api/comments', authenticateUser, (req, res) => {const { text, blogPost } = req.body;const comment = new Comment({ commenter: req.user.userId , text, blogPost });comment.save().then(comment => res.json(comment)).catch(err => res.status(400).json(err));});app.get('/api/comments', (req, res) => {Comment.find().populate("blogPost") //populate blog post.then(comments => res.json(comments)).catch(err => res.status(400).json(err));});app.get('/api/comments/:id', (req, res) => {Comment.findById(req.params.id).populate("blogPost") //populate blog post.then(comment => res.json(comment)).catch(err => res.status(400).json(err));});app.put('/api/comments/:id', authenticateUser, (req, res) => {Comment.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(comment => res.json(comment)).catch(err => res.status(400).json(err));});app.delete('/api/comments/:id', authenticateUser, (req, res) => {Comment.findByIdAndRemove(req.params.id).then(() => res.json({ message: 'Comment deleted' })).catch(err => res.status(400).json(err));});
+→ Source Link :https://github.com/tanvitrivedi/Blog-App-API-with-Node-Express-and-MongoDB/tree/main
+You can also find the server.js (index.js ) full code in the mentioned GitHub repository.
+
+Step 15: Run the project
+Now, run the project with the below command in the terminal.
+npm startthe
+After that, download and login to the Postman application to check API calling.
+Postman: https://www.postman.com/downloads/
+Now, call the APIs as below.
+USER REGISTRATION
+
+
+Entry in Database
+LOGIN
+
+AUTHENTICATE
+
+CREATING BLOG POST
+
+GET APRTICULAR BLOGPOST AS ID
+
+GET ALL BLOGPOSTS
+
+GET POSTS BY FILTER
+
+UPDATE THE BLOGPOST
+
+DELETE BLOGPOST WITH ID
+
+CREATE COMMENT
+
+GET COMMENT
+
+DELETE COMMENT
+
+
+
